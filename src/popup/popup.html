@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Content Blocker</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="brand">
+        <img src="../icons/icon-32.png" width="24" height="24" alt="" />
+        <h1>AI Content Blocker</h1>
+      </div>
+      <label class="switch" title="Turn the extension on or off everywhere">
+        <input id="enabled" type="checkbox" role="switch" aria-label="Enable AI Content Blocker" />
+        <span class="track"><span class="thumb"></span></span>
+      </label>
+    </header>
+
+    <div id="status" class="status" role="status">
+      <span class="dot"></span><span id="status-text">Loading…</span>
+    </div>
+
+    <section class="card" aria-labelledby="page-heading">
+      <div class="card-head">
+        <h2 id="page-heading">Current page</h2>
+        <span id="hostname" class="hostname"></span>
+      </div>
+      <dl class="stats">
+        <div><dt>AI content detected</dt><dd id="stat-detected">–</dd></div>
+        <div><dt>Blocked</dt><dd id="stat-blocked">–</dd></div>
+        <div><dt>Visible</dt><dd id="stat-visible">–</dd></div>
+      </dl>
+      <p id="page-note" class="note" hidden></p>
+    </section>
+
+    <div class="actions">
+      <button id="scan" class="btn primary" type="button">Scan Page</button>
+      <button id="show-all" class="btn" type="button">Show All</button>
+      <button id="block-all" class="btn" type="button">Block All</button>
+      <button id="site-toggle" class="btn" type="button">Disable on This Site</button>
+    </div>
+
+    <section class="card sensitivity">
+      <div class="card-head">
+        <h2><label for="sensitivity">Sensitivity</label></h2>
+        <span id="sensitivity-label" class="pill">Medium</span>
+      </div>
+      <input id="sensitivity" type="range" min="1" max="5" step="1" value="3" />
+      <div class="range-labels" aria-hidden="true"><span>Low</span><span>High</span></div>
+    </section>
+
+    <p class="disclaimer">
+      Scores are estimates of how <em>likely</em> text is AI-generated — never proof. Analysis runs locally; no page content
+      leaves your browser.
+    </p>
+
+    <footer class="footer">
+      <button id="open-options" class="link" type="button">Settings</button>
+      <span class="sep">·</span>
+      <button id="open-privacy" class="link" type="button">Privacy</button>
+    </footer>
+
+    <section class="support" aria-labelledby="support-heading">
+      <div>
+        <h2 id="support-heading">☕ Buy Me a Coffee</h2>
+        <p>Enjoying AI Content Blocker? Support the developer.</p>
+      </div>
+      <a id="support-link" class="btn support-btn" target="_blank" rel="noopener noreferrer">
+        Support on PayPal
+        <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M10 14 20 4"/><path d="M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"/></svg>
+      </a>
+      <p class="fineprint">Opens PayPal in a new tab. The extension never handles payment information.</p>
+    </section>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Content Blocker – Demo page</title>
+    <link rel="icon" href="data:," />
+    <style>
+      body { font: 16px/1.6 Georgia, serif; max-width: 760px; margin: 0 auto; padding: 16px; color: #222; background: #fff; }
+      header, footer { font-family: system-ui, sans-serif; font-size: 14px; background: #f3f3f3; padding: 8px 12px; border-radius: 6px; }
+      nav a { margin-right: 12px; }
+      .comment { border-top: 1px solid #ddd; padding: 10px 0; }
+      .meta { font: 13px system-ui, sans-serif; color: #777; }
+      .controls { font-family: system-ui, sans-serif; margin: 16px 0; display: flex; gap: 8px; flex-wrap: wrap; }
+      .controls button { font: inherit; padding: 6px 12px; }
+      pre { background: #f6f8fa; padding: 10px; overflow: auto; }
+      .label { font: 600 12px system-ui, sans-serif; color: #888; text-transform: uppercase; letter-spacing: .05em; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav><a href="#">Home</a><a href="#">News</a><a href="#">Reviews</a><a href="#">About</a></nav>
+    </header>
+    <div class="cookie-consent" id="cookie">
+      <p>In today's fast-paced digital world, cookies play a crucial role. Moreover, it's important to note that you can change your settings at any time. (Cookie banner — never analysed.)</p>
+    </div>
+
+    <main>
+      <p class="label">Expected: blocked (AI-style article)</p>
+      <article id="ai-article">
+        <h1>The Ultimate Guide to Content Marketing</h1>
+        <div class="article-content">
+          <p>In today's fast-paced digital world, content marketing has become an essential tool for businesses of all sizes. Whether you're a small startup or a well-established enterprise, understanding the fundamentals of content marketing can help you unlock new opportunities for growth.</p>
+          <p>Moreover, a well-crafted content strategy allows you to build trust with your audience and establish your brand as a leader in your industry. Furthermore, high-quality content plays a pivotal role in improving your search engine rankings.</p>
+          <p>In this article, we will delve into the key strategies that can help you navigate the ever-evolving landscape of content marketing. Ultimately, the goal is to create valuable, engaging content that resonates with your target audience and drives measurable results.</p>
+        </div>
+      </article>
+
+      <p class="label">Expected: visible (human news report)</p>
+      <article id="human-article">
+        <h2>Council delays Riverside vote</h2>
+        <p>The city council voted 7-2 on Tuesday to postpone a decision on the Riverside rezoning plan until at least November, after more than 60 residents signed up to speak at a meeting that ran past midnight.</p>
+        <p>Council member Ana Ortiz, who represents the district, said she wanted more time to review a traffic study released just four days earlier. The developer, Harbor Point LLC, has proposed 340 apartments and a grocery store on the former rail yard.</p>
+      </article>
+
+      <pre><code>// Code is never analysed:
+// Certainly! Here are some ways to delve into the ever-evolving landscape.
+function debounce(fn, wait) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), wait); }; }</code></pre>
+
+      <h2>Comments</h2>
+      <section id="comments">
+        <div class="comment">
+          <div class="meta">casual_carl · 3h</div>
+          <div class="comment-body" id="human-comment"><p>lol this happened to me last week. bought the cheap version off amazon bc i didnt want to spend $80 on the name brand one and honestly? it's fine. the lid is kinda flimsy and my kid already cracked the handle but for 20 bucks what do you expect.</p></div>
+        </div>
+        <div class="comment">
+          <div class="meta">helpful_helper · 2h</div>
+          <div class="comment-body" id="ai-comment"><p>As an AI language model, I don't have personal opinions or experiences. However, I can provide some general information on this topic. It's important to note that the best approach may vary depending on your specific needs and circumstances. Here are some factors to consider: the cost, the long-term benefits, and the potential risks involved. Additionally, it may be helpful to consult with a qualified professional. I hope this helps!</p></div>
+        </div>
+      </section>
+
+      <div class="controls">
+        <button id="add-ai" type="button">Load AI-style comment (dynamic)</button>
+        <button id="add-human" type="button">Load human comment (dynamic)</button>
+        <button id="spa-nav" type="button">Simulate SPA navigation</button>
+      </div>
+      <form><textarea rows="3" cols="60">Certainly! Here are some ways to improve your productivity. (Text in form fields is never touched.)</textarea></form>
+    </main>
+
+    <footer>© Demo site · Contact · Privacy · Terms</footer>
+    <script src="demo.js"></script>
+  </body>
+</html>

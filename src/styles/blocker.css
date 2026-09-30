@@ -1,0 +1,43 @@
+/*
+ * Page-level styles injected by the manifest. Only attribute selectors on
+ * elements the extension marked are used, so nothing else on the page is
+ * affected. The notice UI itself lives in a Shadow DOM (see placeholder.js).
+ */
+
+[data-aicb-state="placeholder"],
+[data-aicb-state="hidden"] {
+  display: none !important;
+}
+
+/* New content waiting (a few ms) for analysis: invisible, but keeps its
+   layout so nothing jumps. A watchdog removes this after 2 s at most. */
+[data-aicb-pending] {
+  opacity: 0 !important;
+}
+
+[data-aicb-state="blurred"] {
+  filter: blur(7px) !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  transition: filter 0.15s ease !important;
+}
+
+[data-aicb-state="blurred"] * {
+  pointer-events: none !important;
+}
+
+[data-aicb-state="collapsed"] {
+  max-height: 3.6em !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-mask-image: linear-gradient(to bottom, #000 15%, transparent 100%) !important;
+  mask-image: linear-gradient(to bottom, #000 15%, transparent 100%) !important;
+}
+
+aicb-notice {
+  display: block;
+  max-width: 100%;
+}

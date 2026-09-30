@@ -1,0 +1,27 @@
+{
+  "name": "ai-content-blocker",
+  "version": "1.0.0",
+  "description": "Chrome extension (Manifest V3) that detects likely AI-generated text and hides, blurs, collapses or replaces it. All analysis runs locally.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.mjs && node scripts/verify-build.mjs",
+    "build:dev": "node scripts/build.mjs --dev",
+    "watch": "node scripts/build.mjs --dev --watch",
+    "verify": "node scripts/verify-build.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "icons": "node scripts/generate-icons.mjs",
+    "demo": "node scripts/serve-demo.mjs",
+    "calibrate": "node scripts/calibrate.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "jsdom": "^30.1.1",
+    "vitest": "^5.0.2"
+  }
+}

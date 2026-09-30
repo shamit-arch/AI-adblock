@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Content Blocker – Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <nav class="sidebar" aria-label="Settings sections">
+        <div class="brand">
+          <img src="../icons/icon-48.png" width="32" height="32" alt="" />
+          <span>AI Content Blocker</span>
+        </div>
+        <a href="#general">General</a>
+        <a href="#blocking">Blocking behavior</a>
+        <a href="#detection">Detection</a>
+        <a href="#sites">Website controls</a>
+        <a href="#performance">Performance</a>
+        <a href="#playground">Test the detector</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#about">How it works</a>
+        <a href="#support">Support</a>
+      </nav>
+
+      <main class="content">
+        <header class="page-head">
+          <h1>Settings</h1>
+          <p>Changes are saved automatically and apply to open tabs immediately.</p>
+        </header>
+
+        <!-- General -->
+        <section id="general" class="card">
+          <h2>General</h2>
+          <label class="row toggle">
+            <span><strong>Enable extension</strong><small>Turn detection and blocking on or off everywhere.</small></span>
+            <input type="checkbox" data-setting="enabled" />
+          </label>
+          <label class="row toggle">
+            <span><strong>Enable automatic scanning</strong><small>Scan pages when they load. When off, use “Scan Page” in the popup.</small></span>
+            <input type="checkbox" data-setting="autoScan" />
+          </label>
+          <label class="row toggle">
+            <span><strong>Scan dynamically loaded content</strong><small>Watch for new posts and comments (infinite scroll, single-page apps).</small></span>
+            <input type="checkbox" data-setting="scanDynamic" />
+          </label>
+          <div class="row">
+            <span><strong>Detection sensitivity</strong><small>How strongly AI-style evidence counts. Higher finds more, with more false positives.</small></span>
+            <div class="range">
+              <input type="range" min="1" max="5" step="1" data-setting="sensitivity" aria-label="Detection sensitivity" />
+              <div class="range-labels"><span>Low</span><output data-output="sensitivity"></output><span>High</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Blocking -->
+        <section id="blocking" class="card">
+          <h2>Blocking behavior</h2>
+          <fieldset class="choices">
+            <legend class="sr-only">Blocking behavior</legend>
+            <label class="choice">
+              <input type="radio" name="action" value="placeholder" data-setting="action" />
+              <span><strong>Placeholder</strong><small>Replace with a compact notice and a “Show content” button. (Default)</small></span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="action" value="collapse" data-setting="action" />
+              <span><strong>Collapse</strong><small>Shrink to a couple of faded lines with an “Expand” bar.</small></span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="action" value="blur" data-setting="action" />
+              <span><strong>Blur</strong><small>Blur the text in place. Click it to reveal.</small></span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="action" value="hide" data-setting="action" />
+              <span><strong>Hide</strong><small>Remove from view entirely. Use “Show All” in the popup to restore.</small></span>
+            </label>
+          </fieldset>
+          <label class="row toggle">
+            <span><strong>Show reasons in notices</strong><small>e.g. “Formulaic transitions, Stock AI phrasing”.</small></span>
+            <input type="checkbox" data-setting="showReasons" />
+          </label>
+        </section>
+
+        <!-- Detection -->
+        <section id="detection" class="card">
+          <h2>Detection</h2>
+          <div class="row">
+            <span><strong>Confidence threshold</strong><small>Content scoring at or above this is blocked. Borderline scores stay visible.</small></span>
+            <div class="range">
+              <input type="range" min="31" max="99" step="1" data-setting="confidenceThreshold" aria-label="Confidence threshold" />
+              <div class="range-labels"><span>31</span><output data-output="confidenceThreshold"></output><span>99</span></div>
+            </div>
+          </div>
+          <div class="row">
+            <span><strong>Minimum text length</strong><small>Shorter blocks (in characters) are ignored — very short text can’t be judged.</small></span>
+            <input type="number" min="40" max="2000" step="10" data-setting="minTextLength" />
+          </div>
+          <label class="row toggle">
+            <span><strong>Enable phrase detection</strong><small>Chatbot boilerplate, stock AI phrases and vocabulary.</small></span>
+            <input type="checkbox" data-setting="enablePhraseDetection" />
+          </label>
+          <label class="row toggle">
+            <span><strong>Enable style detection</strong><small>Formulaic structure, uniform rhythm, template headings, list formats.</small></span>
+            <input type="checkbox" data-setting="enableStyleDetection" />
+          </label>
+          <label class="row toggle">
+            <span><strong>Block content the site labels as AI</strong><small>For example Google’s “AI Overview”.</small></span>
+            <input type="checkbox" data-setting="blockSiteLabeledAI" />
+          </label>
+          <details class="bands">
+            <summary>Score bands (labels)</summary>
+            <p class="hint">Lower bound of each label. Must be increasing.</p>
+            <div class="band-grid">
+              <label>Possibly AI-generated from <input type="number" min="1" max="98" data-setting="bandUncertain" /></label>
+              <label>Likely AI-generated from <input type="number" min="2" max="99" data-setting="bandLikely" /></label>
+              <label>Highly likely from <input type="number" min="3" max="100" data-setting="bandHigh" /></label>
+            </div>
+          </details>
+        </section>
+
+        <!-- Sites -->
+        <section id="sites" class="card">
+          <h2>Website controls</h2>
+          <div class="lists">
+            <div>
+              <label for="whitelist"><strong>Whitelist</strong> <small>— never scanned</small></label>
+              <textarea id="whitelist" data-list="whitelist" rows="7" spellcheck="false" placeholder="youtube.com&#10;reddit.com&#10;example.com"></textarea>
+            </div>
+            <div>
+              <label for="blacklist"><strong>Blacklist</strong> <small>— strict detection always on</small></label>
+              <textarea id="blacklist" data-list="blacklist" rows="7" spellcheck="false" placeholder="spammy-blog.example"></textarea>
+            </div>
+          </div>
+          <p class="hint">One domain per line. Subdomains are included (<code>reddit.com</code> covers <code>old.reddit.com</code>). Blacklisted sites use maximum sensitivity and a threshold 15 points lower. A site in both lists is treated as whitelisted.</p>
+          <p class="hint" id="list-errors" role="alert"></p>
+        </section>
+
+        <!-- Performance -->
+        <section id="performance" class="card">
+          <h2>Performance</h2>
+          <div class="row">
+            <span><strong>Maximum elements per scan</strong><small>Blocks analysed per batch (each batch is also limited to ~16 ms). New content that doesn’t fit is kept invisible for a moment until checked.</small></span>
+            <input type="number" min="10" max="2000" step="10" data-setting="maxElementsPerScan" />
+          </div>
+          <div class="row">
+            <span><strong>Scan delay (ms)</strong><small>Extra wait before the first scan. 0 = check content before the page is painted (recommended).</small></span>
+            <input type="number" min="0" max="5000" step="50" data-setting="scanDelay" />
+          </div>
+          <div class="row">
+            <span><strong>MutationObserver debounce (ms)</strong><small>0 = check new content immediately, before it is shown (recommended). Higher values batch work on very busy pages, but new content may briefly appear before it is blocked.</small></span>
+            <input type="number" min="0" max="10000" step="50" data-setting="mutationDebounce" />
+          </div>
+        </section>
+
+        <!-- Playground -->
+        <section id="playground" class="card">
+          <h2>Test the detector</h2>
+          <p class="hint">Paste any text to see its score and the signals behind it, using your current settings. Nothing is sent anywhere.</p>
+          <textarea id="playground-input" rows="7" placeholder="Paste text here…"></textarea>
+          <div class="playground-actions">
+            <button id="playground-run" class="btn primary" type="button">Analyze</button>
+            <button id="playground-sample" class="btn" type="button">Try an AI-style sample</button>
+          </div>
+          <div id="playground-result" class="playground-result" hidden></div>
+        </section>
+
+        <!-- Privacy -->
+        <section id="privacy" class="card">
+          <h2>Privacy</h2>
+          <ul class="plain">
+            <li><strong>All analysis runs locally</strong> in your browser. Page text is never sent to any server — there is no server.</li>
+            <li><strong>No browsing history</strong> is collected or stored. The extension keeps nothing about the pages you visit beyond the counts shown in the popup while a tab is open.</li>
+            <li><strong>No tracking, analytics, or ads.</strong></li>
+            <li>Only your settings (toggles, thresholds, and site lists) are saved, in Chrome’s own storage (<code>chrome.storage.sync</code>), which Chrome may sync across your signed-in browsers.</li>
+            <li>The “Support on PayPal” button simply opens PayPal’s website in a new tab. The extension does not see, handle, or store any payment information.</li>
+          </ul>
+          <h3>Permissions</h3>
+          <ul class="plain">
+            <li><code>storage</code> — save your settings.</li>
+            <li><code>activeTab</code> + <code>scripting</code> — let the popup start the blocker on the current tab when that tab was opened before the extension was installed. Only used when you click the extension.</li>
+            <li>Content script on <code>http</code>/<code>https</code> pages — needed to read and hide page text locally.</li>
+          </ul>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="card">
+          <h2>How detection works — and its limits</h2>
+          <p>Each block of text gets a <strong>confidence score from 0 to 100</strong>, built from several independent kinds of evidence:</p>
+          <ul class="plain">
+            <li><strong>Chatbot boilerplate</strong> — “As an AI language model”, “Certainly! Here are…”, leftover Markdown.</li>
+            <li><strong>Stock phrasing &amp; vocabulary</strong> — “delve into”, “plays a crucial role”, “tapestry”…</li>
+            <li><strong>Formula</strong> — generic intros, “Moreover/Additionally” transitions, stock hedging, “In conclusion” wrap-ups.</li>
+            <li><strong>Structure</strong> — “Label: explanation” bullet lists, template headings.</li>
+            <li><strong>Rhythm</strong> — unusually uniform sentence and paragraph lengths.</li>
+          </ul>
+          <p>Evidence of human writing (slang, casual typing, personal anecdotes, concrete names and numbers, varied rhythm) lowers the score. <strong>A single kind of evidence is never enough</strong>: text only reaches the “likely” range when at least two independent families agree.</p>
+          <p class="callout"><strong>Important:</strong> no tool can reliably prove that text was written by AI. Scores describe how closely text matches common AI writing patterns. Expect false positives (especially formal or templated human writing) and false negatives (edited or prompted-to-sound-human AI text). Use “Show content” freely, and allow-list sites where results aren’t useful.</p>
+        </section>
+
+        <!-- Support -->
+        <section id="support" class="card support">
+          <div>
+            <h2>☕ Support the Developer</h2>
+            <p>Enjoying AI Content Blocker? If it’s useful to you, you can buy the developer a coffee.</p>
+            <p class="hint">Opens PayPal in a new tab. The extension itself never handles payment information.</p>
+          </div>
+          <a id="support-link" class="btn" target="_blank" rel="noopener noreferrer">
+            ☕ Buy Me a Coffee
+            <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M10 14 20 4"/><path d="M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"/></svg>
+          </a>
+        </section>
+
+        <footer class="page-foot">
+          <button id="reset" class="btn danger" type="button">Reset all settings to defaults</button>
+          <span id="version"></span>
+        </footer>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="options.js"></script>
+  </body>
+</html>
